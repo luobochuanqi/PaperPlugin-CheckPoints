@@ -1,0 +1,6 @@
+name: CheckPoints
+version: '1.0-SNAPSHOT'
+main: xyz.luobo.checkPoints.CheckPoints
+api-version: '1.21'
+authors: [ luobo ]
+description: "添加一种基于骰子的抽奖方式"
