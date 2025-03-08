@@ -4,3 +4,9 @@ main: xyz.luobo.checkPoints.CheckPoints
 api-version: '1.21'
 authors: [ luobo ]
 description: "添加一种基于骰子的抽奖方式"
+commands:
+  checkpoints:
+    aliases:
+      - "cp"
+    usage: "/checkpoints <player-name> <chance>"
+    description: "Open Check GUI."
