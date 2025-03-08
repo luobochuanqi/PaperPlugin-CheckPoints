@@ -5,10 +5,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class GUIListener implements Listener {
+    private int toLockIndex = 0;
+
     @EventHandler
     public void onClick(InventoryClickEvent e) {
-        if (e.getInventory().getHolder() instanceof CheckPointsGUI) {
-            CheckPointsGUI gui = (CheckPointsGUI) e.getInventory().getHolder();
+        if (e.getInventory().getHolder() instanceof CheckPointsGUI gui) {
             int slot = e.getSlot();
 
             if (gui.getSession().isChecking()) {
@@ -20,7 +21,8 @@ public class GUIListener implements Listener {
             if (slot == 0) {
                 e.getWhoClicked().closeInventory();
             } else if (slot == 1) {
-                gui.getSession().lockDice(0);
+                gui.getSession().useFocus(toLockIndex);
+                toLockIndex ++;
             } else if (slot == 2) {
                 gui.getSession().startCheck();
             }
