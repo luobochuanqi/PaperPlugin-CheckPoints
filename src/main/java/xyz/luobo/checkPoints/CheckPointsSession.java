@@ -59,4 +59,8 @@ public class CheckPointsSession {
 
         player.sendMessage("§6[判定结果] 成功数: " + success + "/" + lockedDices.length);
     }
+
+    public boolean isChecking() {
+        return isChecking;
+    }
 }

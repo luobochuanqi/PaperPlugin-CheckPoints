@@ -5,17 +5,19 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
-public class CheckPointsGUI {
+public class CheckPointsGUI implements InventoryHolder {
 
     private final Player player;
     private final Inventory inv;
     private final CheckPointsSession session;
 
     public CheckPointsGUI(Player player, int diceCount, double rate) {
-        this.inv = Bukkit.createInventory(player, InventoryType.CHEST, "判定面板");
+        this.inv = Bukkit.createInventory(this, InventoryType.CHEST, "判定面板");
         this.session = new CheckPointsSession(player, this, diceCount, rate);
         this.player = player;
 
@@ -65,5 +67,10 @@ public class CheckPointsGUI {
 
     public CheckPointsSession getSession() {
         return session;
+    }
+
+    @Override
+    public @NotNull Inventory getInventory() {
+        return this.inv;
     }
 }

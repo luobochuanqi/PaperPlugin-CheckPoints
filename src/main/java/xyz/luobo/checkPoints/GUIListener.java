@@ -8,11 +8,15 @@ public class GUIListener implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         if (e.getInventory().getHolder() instanceof CheckPointsGUI) {
-            e.setCancelled(true);
-
             CheckPointsGUI gui = (CheckPointsGUI) e.getInventory().getHolder();
             int slot = e.getSlot();
 
+            if (gui.getSession().isChecking()) {
+                e.setCancelled(true);
+                return;
+            }
+
+            e.setCancelled(true);
             if (slot == 0) {
                 e.getWhoClicked().closeInventory();
             } else if (slot == 1) {
