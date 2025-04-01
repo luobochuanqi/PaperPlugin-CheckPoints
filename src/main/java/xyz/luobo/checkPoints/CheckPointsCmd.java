@@ -19,10 +19,11 @@ public class CheckPointsCmd implements CommandExecutor {
                 return true;
             }
             Player player = Bukkit.getPlayer(args[0]);
-            int diceCount = Math.min(Integer.parseInt(args[1]), 18); // 最大18个
+            int diceCount = Math.min(Integer.parseInt(args[1]), 27); // 最大27个
             double successRate = Double.parseDouble(args[2]);
+            int focusCount = Math.min(Integer.parseInt(args[3]), 7); // 最大7个
 
-            new CheckPointsGUI(player, diceCount, successRate).open();
+            new CheckPointsGUI(player, diceCount, successRate, focusCount).open();
             return true;
         }
         return false;

@@ -11,21 +11,39 @@ public class CheckPointsSession {
     private final CheckPoints plugin = CheckPoints.getPlugin(CheckPoints.class);
     private final CheckPointsGUI gui;
     private final boolean[] checkedDices;
+    private final boolean[] focuses;
     private final double successRate;
     private boolean isChecking = false;
+    private int toLockIndex = 0;
 
-    public CheckPointsSession(Player player, CheckPointsGUI gui, int diceCount, double rate) {
+    public CheckPointsSession(Player player, CheckPointsGUI gui, int diceCount, int focusCount, double rate) {
         this.player = player;
         this.checkedDices = new boolean[diceCount];
+        this.focuses = new boolean[focusCount];
         this.successRate = rate;
         this.gui = gui;
     }
 
-    // 使用 Focus 锁定骰子为成功
+    /**
+     * 使用 Focus 锁定骰子为成功
+     * @param index
+     */
     public void lockDice(int index) {
         if (index < checkedDices.length) {
             checkedDices[index] = true;
             updateDice(index, true);
+        }
+    }
+
+    /**
+     * 使用 Focus 锁定点位
+     * WTF?!
+     * @param index
+     */
+    private void setFocused(int index) {
+        if (index < focuses.length) {
+            focuses[index] = true;
+            updateFocus(index);
         }
     }
 
@@ -57,6 +75,10 @@ public class CheckPointsSession {
         gui.updateDiceDisplay(current, success ? PointsType.SUCCESS : PointsType.FAILURE);
     }
 
+    private void updateFocus(int current) {
+        gui.updateFocusDisplay(current, FocusType.FOCUSED);
+    }
+
     private void sendResult() {
         long success = IntStream.range(0, checkedDices.length)
                 .filter(i -> checkedDices[i] || Math.random() < successRate)
@@ -69,10 +91,15 @@ public class CheckPointsSession {
         return isChecking;
     }
 
-    public void useFocus(int index) {
+    public boolean useFocus() {
+
         // 仅在非判定过程时允许使用 Focus
         if (!isChecking){
-            lockDice(index);
+            toLockIndex ++;
+//            lockDice(index);
+            setFocused(toLockIndex);
+            return true;
         }
+        return false;
     }
 }
