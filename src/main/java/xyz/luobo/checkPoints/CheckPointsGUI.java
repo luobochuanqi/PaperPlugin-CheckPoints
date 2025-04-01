@@ -3,7 +3,6 @@ package xyz.luobo.checkPoints;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -16,9 +15,9 @@ public class CheckPointsGUI implements InventoryHolder {
     private final Inventory inv;
     private final CheckPointsSession session;
 
-    public CheckPointsGUI(Player player, int diceCount, double rate) {
-        this.inv = Bukkit.createInventory(this, InventoryType.CHEST, "判定面板");
-        this.session = new CheckPointsSession(player, this, diceCount, rate);
+    public CheckPointsGUI(Player player, int diceCount, double rate, int focusCount) {
+        this.inv = Bukkit.createInventory(this, 45, "判定面板");
+        this.session = new CheckPointsSession(player, this, diceCount, focusCount, rate);
         this.player = player;
 
         // 控制栏
@@ -30,6 +29,28 @@ public class CheckPointsGUI implements InventoryHolder {
         for (int i = 0; i < diceCount; i++) {
             updateDiceDisplay(i, PointsType.WAITING);
         }
+
+        // 初始化判定点区域
+        for (int i = 0; i < focusCount; i++) {
+            updateFocusDisplay(i, FocusType.WAITING);
+        }
+    }
+
+    public void updateFocusDisplay(int index, FocusType focusType) {
+        int slot = index + 36;
+        Material material;
+        String displayName = switch (focusType) {
+            case FOCUSED -> {
+                material = Material.ENDER_PEARL;
+                yield "§a已加点";
+            }
+            default -> {
+                material = Material.ENDER_EYE;
+                yield "§f待加点";
+            }
+        };
+
+        inv.setItem(slot, createIcon(material, displayName));
     }
 
     public void updateDiceDisplay(int index, PointsType pointsType) {
