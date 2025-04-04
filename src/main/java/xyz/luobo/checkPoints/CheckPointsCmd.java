@@ -14,17 +14,53 @@ public class CheckPointsCmd implements CommandExecutor {
                 sender.sendMessage("CheckPoints v1.0");
                 return true;
             }
-            if (args[0].equalsIgnoreCase("reload")) {
-                sender.sendMessage("Reloading CheckPoints...");
-                return true;
-            }
-            Player player = Bukkit.getPlayer(args[0]);
-            int diceCount = Math.min(Integer.parseInt(args[1]), 27); // 最大27个
-            double successRate = Double.parseDouble(args[2]);
-            int focusCount = Math.min(Integer.parseInt(args[3]), 7); // 最大7个
+            switch (args[0].toLowerCase()) {
+                case "help" -> {
+                    sender.sendMessage("CheckPoints v1.0");
+                    sender.sendMessage("/checkpoints gui <player> <diceCount> <successRate> <focusCount>");
+                    sender.sendMessage("/checkpoints reload");
+                    sender.sendMessage("/checkpoints version");
+                    return true;
+                }
+                case "version" -> {
+                    sender.sendMessage("CheckPoints v1.0");
+                    return true;
+                }
+                case "reload" -> {
+                    sender.sendMessage("Reloading CheckPoints...");
+                    return true;
+                }
+                case "gui" -> {
+                    if (args.length < 4) {
+                        sender.sendMessage("Usage: /checkpoints gui <player> <diceCount> <successRate> <focusCount>");
+                        return true;
+                    }
+                    Player player = Bukkit.getPlayer(args[1]);
+                    int diceCount = Math.min(Integer.parseInt(args[2]), 27); // 最大27个
+                    double successRate = Double.parseDouble(args[3]);
+                    int focusCount = Math.min(Integer.parseInt(args[4]), 7); // 最大7个
 
-            new CheckPointsGUI(player, diceCount, successRate, focusCount).open();
-            return true;
+                    if (player == null) {
+                        sender.sendMessage("Player not found.");
+                    }
+
+                    new CheckPointsGUI(player, diceCount, successRate, focusCount).open();
+                    return true;
+                }
+                case "actionbar" -> {
+                    if (args.length < 2) {
+                        sender.sendMessage("Usage: /checkpoints actionbar <player> <diceCount> <successRate>");
+                        return true;
+                    }
+                    Player player = Bukkit.getPlayer(args[1]);
+                    if (player != null) {
+                        String message = ActionBarManager.getCurrentMessage(player.getUniqueId());
+                    } else {
+                        sender.sendMessage("Player not found.");
+                    }
+                    return true;
+                }
+            }
         }
         return false;
     }

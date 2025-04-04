@@ -6,7 +6,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.stream.IntStream;
 
-public class CheckPointsSession {
+public class CheckPointsGUISession {
     private final Player player;
     private final CheckPoints plugin = CheckPoints.getPlugin(CheckPoints.class);
     private final CheckPointsGUI gui;
@@ -16,7 +16,7 @@ public class CheckPointsSession {
     private boolean isChecking = false;
     private int toLockIndex = 0;
 
-    public CheckPointsSession(Player player, CheckPointsGUI gui, int diceCount, int focusCount, double rate) {
+    public CheckPointsGUISession(Player player, CheckPointsGUI gui, int diceCount, int focusCount, double rate) {
         this.player = player;
         this.checkedDices = new boolean[diceCount];
         this.focuses = new boolean[focusCount];
