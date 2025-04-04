@@ -13,11 +13,11 @@ public class CheckPointsGUI implements InventoryHolder {
 
     private final Player player;
     private final Inventory inv;
-    private final CheckPointsSession session;
+    private final CheckPointsGUISession session;
 
     public CheckPointsGUI(Player player, int diceCount, double rate, int focusCount) {
         this.inv = Bukkit.createInventory(this, 45, "判定面板");
-        this.session = new CheckPointsSession(player, this, diceCount, focusCount, rate);
+        this.session = new CheckPointsGUISession(player, this, diceCount, focusCount, rate);
         this.player = player;
 
         // 控制栏
@@ -86,7 +86,7 @@ public class CheckPointsGUI implements InventoryHolder {
         return item;
     }
 
-    public CheckPointsSession getSession() {
+    public CheckPointsGUISession getSession() {
         return session;
     }
 
