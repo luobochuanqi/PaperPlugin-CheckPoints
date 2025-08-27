@@ -1,4 +1,4 @@
-package xyz.luobo.checkPoints;
+package xyz.luobo.checkPoints.GUI;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

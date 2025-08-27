@@ -1,12 +1,13 @@
-package xyz.luobo.checkPoints;
+package xyz.luobo.checkPoints.Handle;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import xyz.luobo.checkPoints.GUI.CheckPointsGUI;
 
-public class CheckPointsCmd implements CommandExecutor {
+public class PluginCmdHandle implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("checkpoints")) {
@@ -54,7 +55,7 @@ public class CheckPointsCmd implements CommandExecutor {
                     }
                     Player player = Bukkit.getPlayer(args[1]);
                     if (player != null) {
-                        String message = ActionBarManager.getCurrentMessage(player.getUniqueId());
+                        String message = ActionBarHandle.getCurrentMessage(player.getUniqueId());
                     } else {
                         sender.sendMessage("Player not found.");
                     }

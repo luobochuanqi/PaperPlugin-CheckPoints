@@ -1,4 +1,4 @@
-package xyz.luobo.checkPoints;
+package xyz.luobo.checkPoints.GUI;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -8,6 +8,8 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import xyz.luobo.checkPoints.FocusType;
+import xyz.luobo.checkPoints.PointsType;
 
 public class CheckPointsGUI implements InventoryHolder {
 

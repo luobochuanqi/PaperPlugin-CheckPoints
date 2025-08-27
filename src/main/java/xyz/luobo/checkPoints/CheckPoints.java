@@ -2,7 +2,10 @@ package xyz.luobo.checkPoints;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import xyz.luobo.checkPoints.GUI.GUIListener;
+import xyz.luobo.checkPoints.Handle.PluginCmdHandle;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public final class CheckPoints extends JavaPlugin {
@@ -16,7 +19,7 @@ public final class CheckPoints extends JavaPlugin {
         instance = this;
 
         if (Bukkit.getPluginCommand("checkpoints") != null) {
-            Bukkit.getPluginCommand("checkpoints").setExecutor(new CheckPointsCmd());
+            Objects.requireNonNull(Bukkit.getPluginCommand("checkpoints")).setExecutor(new PluginCmdHandle());
         }
 
         Bukkit.getPluginManager().registerEvents(new GUIListener(), this);

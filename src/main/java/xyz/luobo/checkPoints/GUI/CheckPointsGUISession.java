@@ -1,8 +1,11 @@
-package xyz.luobo.checkPoints;
+package xyz.luobo.checkPoints.GUI;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import xyz.luobo.checkPoints.CheckPoints;
+import xyz.luobo.checkPoints.FocusType;
+import xyz.luobo.checkPoints.PointsType;
 
 import java.util.stream.IntStream;
 

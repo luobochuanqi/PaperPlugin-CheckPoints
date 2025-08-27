@@ -1,4 +1,4 @@
-package xyz.luobo.checkPoints;
+package xyz.luobo.checkPoints.Handle;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class ActionBarManager {
+public class ActionBarHandle {
     private static final Map<UUID, String> activeMessages = new HashMap<>();
 
     // 更新指定玩家的ActionBar
